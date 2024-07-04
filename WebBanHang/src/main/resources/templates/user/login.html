@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <th:block th:replace="~{layout::link-css}"></th:block>
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            overflow: hidden;
+        }
+        .card-title {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .btn-primary {
+            border: none;
+        }
+        .btn-primary:hover {
+        }
+        .form-label span {
+        }
+        .form-control {
+        }
+        .form-control:focus {
+            box-shadow: none;
+        }
+        .text-danger, .alert {
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 100%, 0);
+            }
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .animate__fadeInUp {
+            animation: fadeInUp 1s ease-out;
+        }
+        .label-animated {
+            animation: fadeInLeft 1s ease-out;
+        }
+        .input-animated {
+            animation: fadeInRight 1s ease-out;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="~{layout::header}"></th:block>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="card-body">
+                    <h3 class="card-title text-center">ĐĂNG NHẬP</h3>
+                    <form th:action="@{/login}" method="post">
+                        <fieldset>
+                            <div th:if="${param.error}" class="alert alert-danger animate__animated animate__shakeX">
+                                Tên đăng nhập và mật khẩu không hợp lệ
+                            </div>
+                            <div th:if="${param.logout}" class="alert alert-success animate__animated animate__fadeIn">
+                                Bạn đã đăng xuất
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label label-animated animate__animated animate__fadeInLeft animate__delay-1s">Tên đăng nhập</label>
+                                <input type="text" required class="form-control input-animated animate__animated animate__fadeInRight animate__delay-1s" id="username" name="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label label-animated animate__animated animate__fadeInLeft animate__delay-1s">Mật khẩu</label>
+                                <input type="password" required class="form-control input-animated animate__animated animate__fadeInRight animate__delay-1s" id="password" name="password">
+                            </div>
+                            <div class="mb-3">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="animate__animated animate__fadeIn animate__delay-1s">
+                                <label for="remember-me" class="animate__animated animate__fadeIn animate__delay-1s">Ghi nhớ đăng nhập</label>
+                            </div>
+                            <div class="d-grid gap-2 form-action">
+                                <button type="submit" class="btn btn-primary animate__animated animate__heartBeat animate__infinite">Đăng nhập</button>
+                                <a href="/register" class="text-primary text-center animate__animated animate__fadeIn animate__delay-1s">Chưa có tài khoản? Đăng ký ngay</a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{layout::footer}"></th:block>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/animate.min.js}"></script>
+</body>
+</html>

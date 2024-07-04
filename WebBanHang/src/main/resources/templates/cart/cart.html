@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title th:text="${title} ?: 'Your Cart'">Your Cart</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        body {
+            min-height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            padding: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .table {
+            overflow: hidden;
+        }
+        .btn {
+            border-radius: 10px;
+        }
+        .btn-primary {
+            border: none;
+        }
+        .btn-primary:hover {
+        }
+        .btn-secondary {
+            border: none;
+        }
+        .btn-secondary:hover {
+        }
+        .btn-danger {
+            border: none;
+        }
+        .btn-danger:hover {
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<section layout:fragment="content" class="container mt-3" data-aos="fade-up" id="cartSection">
+    <h1 data-aos="zoom-in">Your Cart</h1>
+    <div th:if="${cartItems.isEmpty()}" class="alert alert-info" data-aos="fade-in" data-aos-delay="200">Your cart is empty.</div>
+    <table class="table table-hover" th:unless="${cartItems.isEmpty()}" data-aos="fade-up" data-aos-delay="300">
+        <thead class="table-light">
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cartItems}">
+            <td th:text="${item.product.name}"></td>
+            <td>
+                <form th:action="@{/cart/update/{productId}(productId=${item.product.id})}" method="post" class="d-inline">
+                    <input type="number" name="quantity" th:value="${item.quantity}" min="1" class="form-control quantity-input d-inline">
+                    <button type="submit" class="btn btn-success mb-3">Update</button>
+                </form>
+            </td>
+            <td>
+                <a th:href="@{/cart/remove/{productId}(productId=${item.product.id})}" class="btn btn-danger btn-sm">Remove</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mt-3 text-center">
+        <button type="button" class="btn btn-secondary mb-3" id="clearCartButton" data-aos="fade-right" data-aos-delay="400">Clear Cart</button>
+        <a th:href="@{/order/checkout}" class="btn btn-primary mb-3" data-aos="fade-left" data-aos-delay="400">Check Out</a>
+    </div>
+</section>
+<section class="container mt-3 hidden" id="returnSection" data-aos="fade-up">
+    <div class="text-center">
+        <a th:href="@{/products}" class="btn btn-primary" id="returnButton">Back to Products</a>
+    </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1200,
+    });
+
+    document.getElementById('clearCartButton').addEventListener('click', function() {
+        document.getElementById('cartSection').classList.add('hidden');
+        document.getElementById('returnSection').classList.remove('hidden');
+    });
+</script>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>

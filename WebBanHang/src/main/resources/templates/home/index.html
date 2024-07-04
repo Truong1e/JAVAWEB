@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <!-- Linking CSS files dynamically using Thymeleaf -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.min.css}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .floating-circles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            mix-blend-mode: overlay;
+        }
+
+        .circle:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            top: -50px;
+            left: 50px;
+            animation-delay: 0s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(2) {
+            width: 700px;
+            height: 700px;
+            top: -100px;
+            right: 100px;
+            animation-delay: 0s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(3) {
+            width: 600px;
+            height: 600px;
+            bottom: -100px;
+            left: -100px;
+            animation-delay: 4s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(4) {
+            width: 800px;
+            height: 800px;
+            bottom: -150px;
+            right: -150px;
+            animation-delay: 6s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(5) {
+            width: 400px;
+            height: 400px;
+            top: 200px;
+            left: 200px;
+            animation-delay: 8s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(6) {
+            width: 900px;
+            height: 900px;
+            bottom: 250px;
+            right: 250px;
+            animation-delay: 10s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(7) {
+            width: 700px;
+            height: 700px;
+            top: 300px;
+            left: 300px;
+            animation-delay: 12s;
+        }
+
+        /* Add more circles */
+        .circle:nth-child(8) {
+            width: 1100px;
+            height: 1100px;
+            bottom: 350px;
+            right: 350px;
+            animation-delay: 14s;
+        }
+
+        /* Adjust animation for more circles */
+        @keyframes move {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            50% {
+                transform: translateY(-20px) translateX(-20px);
+            }
+            100% {
+                transform: translateY(0) translateX(0);
+            }
+        }
+
+        @keyframes scale {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .content-wrapper {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .jumbotron {
+            color: #333;
+            padding: 3rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .jumbotron h1 {
+            font-weight: 700;
+            font-size: 3rem;
+        }
+
+        .jumbotron p.lead {
+            font-size: 1.25rem;
+        }
+
+        .jumbotron .btn {
+            margin-top: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .btn-primary {
+        }
+
+        .btn-secondary {
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+        }
+
+        .card {
+            margin: 1rem 0;
+            border: none;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h5 {
+            font-weight: 700;
+        }
+
+        /* Animation classes */
+        .animated {
+            animation-duration: 1s;
+            animation-fill-mode: both;
+        }
+
+        .fadeIn {
+            animation-name: fadeIn;
+        }
+
+        .fadeInUp {
+            animation-name: fadeInUp;
+        }
+
+        .fadeInDown {
+            animation-name: fadeInDown;
+        }
+
+        .bounceInDown {
+            animation-name: bounceInDown;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes zoomInOut {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        .btn {
+            animation: zoomInOut 3s infinite alternate;
+        }
+
+        .btn:hover {
+            animation-play-state: paused; /* Dừng animation khi hover */
+        }
+        @keyframes fadeInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        100%
+        {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        }
+
+        @keyframes bounceInDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tắt animation cho nút */
+        .btn {
+            animation: none;
+        }
+
+        /* Tắt animation cho nút khi hover */
+        .btn:hover {
+            animation: none;
+        }
+    </style>
+</head>
+<body>
+<div class="floating-circles">
+    <!-- Thêm các hình tròn ở đây -->
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+</div>
+<div th:replace="layout :: header"></div>
+
+<div class="content-wrapper" th:fragment="content">
+    <div class="container">
+        <div class="jumbotron text-center animated fadeInDown">
+            <h1 class="display-4">Website Bán Hàng</h1>
+            <hr class="my-4">
+            <p class="lead">Chào mừng đến với website bán hàng trực tuyến của chúng tôi.</p>
+            <a class="btn btn-primary btn-lg animated fadeInUp" href="/products" role="button">Xem sản phẩm</a>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card animated fadeInUp delay-1s">
+                    <div class="card-body">
+                        <h5 class="card-title">New Product</h5>
+                        <p class="card-text">Thêm mới sản phẩm của bạn.</p>
+                        <a href="/products/add" class="btn btn-primary">New Product</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card animated fadeInUp delay-2s">
+                    <div class="card-body">
+                        <h5 class="card-title">New Categories</h5>
+                        <p class="card-text">Thêm mới danh mục của bạn.</p>
+                        <a href="/categories/add" class="btn btn-secondary">New Categories</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="layout :: footer"></div>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/wow.min.js}"></script>
+<script>
+    new WOW().init();
+</script>
+</body>
+</html>

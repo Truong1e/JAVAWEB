@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <title>Update Category</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            padding: 40px;
+            margin-top: 100px;
+            max-width: 500px;
+            width: 100%;
+        }
+        .btn-primary {
+            border: none;
+        }
+        .btn-primary:hover {
+
+        }
+        .btn-link {
+        }
+        .btn-link:hover {
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2rem;
+        }
+        .form-control {
+
+        }
+        .form-control:focus {
+        }
+    </style>
+</head>
+<body>
+<header th:replace="layout :: header"></header>
+<section layout:fragment="content" class="container" data-aos="fade-up">
+    <h1 class="mb-4" data-aos="zoom-in">Update Category</h1>
+    <form th:action="@{/categories/update/{id}(id=${category.id})}" th:object="${category}" method="post" class="needs-validation" novalidate data-aos="fade-up" data-aos-delay="200">
+        <div class="mb-3" data-aos="fade-right" data-aos-delay="300">
+            <label for="name" class="form-label">Category Name:</label>
+            <input type="text" th:field="*{name}" class="form-control" id="name" required>
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Valid name is required.</div>
+        </div>
+        <button type="submit" class="btn btn-primary" data-aos="fade-left" data-aos-delay="400">Update</button>
+        <a th:href="@{/categories}" class="btn btn-secondary" data-aos="fade-left" data-aos-delay="500">Cancel</a>
+    </form>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1200,
+    });
+</script>
+<footer th:replace="layout :: footer"></footer>
+</body>
+</html>
